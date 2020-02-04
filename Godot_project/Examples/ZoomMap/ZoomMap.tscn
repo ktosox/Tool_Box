@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Examples/ZoomMap/ZoomMap.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "DOWN"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "UP"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[node name="ZoomMap" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 640, 360 )
+current = true
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 692.084, 275.636, 418.105, 187.756, 374.165, 492.752, 1207.73, 375.148, 998.372, 129.6, 266.899, 112.8, 175.142, 522.476, 675.283, 673.682, 1393.83, 656.881, 135.079, 827.472, -76.8675, 345.423, 398.719, -105.609, 1433.9, 391.948 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/DOWN = SubResource( 2 )
+anims/UP = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
