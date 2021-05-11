@@ -1,0 +1,144 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Examples/ASCII_Shader/ASCII_Screen.shader" type="Shader" id=1]
+[ext_resource path="res://Examples/ASCII_Shader/dots1.png" type="Texture" id=2]
+[ext_resource path="res://Examples/ASCII_Shader/Base.gd" type="Script" id=3]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/on = true
+shader_param/ascii_size = Vector2( 4, 8 )
+shader_param/available_columns = 17
+shader_param/max_columns = 17
+shader_param/ascii_tex = ExtResource( 2 )
+
+[node name="Base" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2( 640, 0 )
+emitting = false
+amount = 500
+lifetime = 4.0
+explosiveness = 0.01
+randomness = 0.31
+emission_shape = 2
+emission_rect_extents = Vector2( 640, 1 )
+angular_velocity = 61.94
+scale_amount = 8.0
+scale_amount_random = 0.49
+scale_amount_curve = SubResource( 4 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 640, 360 )
+emitting = false
+amount = 300
+lifetime = 3.0
+explosiveness = 0.15
+emission_shape = 2
+emission_rect_extents = Vector2( 640, 360 )
+gravity = Vector2( 0, 0 )
+angular_velocity = 77.42
+angular_velocity_random = 0.53
+linear_accel = 20.0
+scale_amount = 76.27
+scale_amount_random = 0.75
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+hue_variation = 0.56
+hue_variation_random = 0.71
+
+[node name="VSeparator" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="VSeparator"]
+margin_right = 634.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="VSeparator"]
+material = SubResource( 1 )
+margin_left = 646.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="Overlay"]
+margin_left = 16.0
+margin_top = 637.883
+margin_right = 60.0
+margin_bottom = 657.883
+rect_scale = Vector2( 3, 3 )
+text = "NEXT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="Overlay"]
+margin_left = 181.873
+margin_top = 637.883
+margin_right = 322.873
+margin_bottom = 657.883
+rect_scale = Vector2( 3, 3 )
+text = "TOGGLE PARTICLE 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="Overlay"]
+margin_left = 646.0
+margin_top = 637.883
+margin_right = 787.0
+margin_bottom = 657.883
+rect_scale = Vector2( 3, 3 )
+text = "TOGGLE PARTICLE 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSlider" type="VSlider" parent="."]
+margin_left = 16.0
+margin_top = 25.4726
+margin_right = 32.0
+margin_bottom = 198.473
+max_value = 1.0
+step = 0.05
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 4.89994
+margin_top = 6.68173
+margin_right = 71.8999
+margin_bottom = 20.6817
+text = "brightness"
+
+[connection signal="pressed" from="Overlay/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Overlay/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Overlay/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="value_changed" from="VSlider" to="." method="_on_VSlider_value_changed"]

@@ -10,18 +10,20 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
 
 config/name="ToolBox"
+run/main_scene="res://Examples/ASCII_Shader/Base.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input]
 

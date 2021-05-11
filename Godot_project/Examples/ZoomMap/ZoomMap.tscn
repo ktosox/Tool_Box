@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Examples/ZoomMap/ZoomMap.gd" type="Script" id=1]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "DOWN"
 length = 2.0
 tracks/0/type = "value"
@@ -18,8 +18,7 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 3 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "UP"
+[sub_resource type="Animation" id=2]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
@@ -46,8 +45,8 @@ points = PoolVector2Array( 692.084, 275.636, 418.105, 187.756, 374.165, 492.752,
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
-anims/DOWN = SubResource( 2 )
-anims/UP = SubResource( 1 )
+anims/DOWN = SubResource( 1 )
+anims/UP = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
