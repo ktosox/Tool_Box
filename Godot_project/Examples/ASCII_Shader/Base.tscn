@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Examples/ASCII_Shader/ASCII_Screen.shader" type="Shader" id=1]
-[ext_resource path="res://Examples/ASCII_Shader/dots1.png" type="Texture" id=2]
+[ext_resource path="res://Examples/ASCII_Shader/dots6.png" type="Texture" id=2]
 [ext_resource path="res://Examples/ASCII_Shader/Base.gd" type="Script" id=3]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=2]
@@ -13,21 +13,19 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
 shader_param/on = true
-shader_param/ascii_size = Vector2( 4, 8 )
-shader_param/available_columns = 17
-shader_param/max_columns = 17
+shader_param/ascii_size = Vector2( 8, 8 )
+shader_param/available_columns = 10
+shader_param/max_columns = 10
+shader_param/amount = 2.0
 shader_param/ascii_tex = ExtResource( 2 )
 
 [node name="Base" type="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 position = Vector2( 640, 0 )
@@ -41,7 +39,7 @@ emission_rect_extents = Vector2( 640, 1 )
 angular_velocity = 61.94
 scale_amount = 8.0
 scale_amount_random = 0.49
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 1 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 640, 360 )
@@ -70,15 +68,15 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="VSeparator"]
-margin_right = 634.0
-margin_bottom = 720.0
+margin_right = 506.0
+margin_bottom = 576.0
 size_flags_horizontal = 3
 
 [node name="ColorRect" type="ColorRect" parent="VSeparator"]
-material = SubResource( 1 )
-margin_left = 646.0
-margin_right = 1280.0
-margin_bottom = 720.0
+material = SubResource( 4 )
+margin_left = 518.0
+margin_right = 1024.0
+margin_bottom = 576.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,9 +125,6 @@ margin_bottom = 198.473
 max_value = 1.0
 step = 0.05
 value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 margin_left = 4.89994

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture5.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/seamless_texture10.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform vec2 scrollSpeed = vec2(1.0,1.0);
+uniform sampler2D texture2;
+uniform sampler2D gradient;
+
+uniform float sharpnes = 1.0;
+
+void fragment(){
+	float color1 = texture(TEXTURE, UV + scrollSpeed * TIME).r;
+	float color2 = texture(texture2, UV + scrollSpeed * TIME).r;
+	float energ = color1 * color2 - ( sharpnes - UV.y);
+	COLOR = texture(gradient, vec2(energ));
+}"
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.344051, 0.659164, 0.974277 )
+colors = PoolColorArray( 0.195263, 0.323361, 0.324737, 0.0206349, 0.0156863, 0.917647, 0.72549, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 60
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/scrollSpeed = Vector2( 0, 1.102 )
+shader_param/sharpnes = 0.055
+shader_param/texture2 = ExtResource( 2 )
+shader_param/gradient = SubResource( 3 )
+
+[node name="SickFlame" type="Sprite"]
+material = SubResource( 4 )
+texture = ExtResource( 1 )
+centered = false

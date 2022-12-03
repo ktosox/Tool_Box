@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture13.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Particles/smoke2.png" type="Texture" id=3]
+[ext_resource path="res://Shader_Examples/seamless_texture10.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+uniform vec2 scorll1 = vec2(0.25,-0.3);
+uniform vec2 scorll2 = vec2(0.2,-0.4);
+
+uniform float col1Bonus = 0.0;
+uniform float col2Bonus = 0.0;
+
+uniform sampler2D lifetimeGradient;
+uniform sampler2D overlapGradient;
+
+uniform float sharpnes = 5.0;
+
+void fragment(){
+	
+	float particleSeed = COLOR.r / (COLOR.r + COLOR.b + COLOR.g);
+	
+	float adjustedTime = TIME + particleSeed * 154.685;
+	
+	float intesity = (texture(texture1, UV + scorll1 * adjustedTime).r + col1Bonus) * (texture(texture2, UV + scorll2 * adjustedTime).r + col2Bonus);
+	
+	vec4 overlapColor = texture(overlapGradient, vec2(intesity * 2.8));
+	
+	vec4 lifetimeColor = texture(lifetimeGradient, vec2(COLOR.a));
+	COLOR = lifetimeColor * overlapColor;
+	COLOR.a *= min(1.0, intesity * sharpnes) * texture(TEXTURE,UV).a;
+}"
+
+[sub_resource type="Gradient" id=60]
+offsets = PoolRealArray( 0.209003, 0.347267, 0.562701, 0.794212, 1 )
+colors = PoolColorArray( 0, 0.321569, 0.00392157, 0, 0.411467, 0.679688, 0.167267, 1, 0.393478, 0.864354, 0.941406, 1, 0.501465, 0.783882, 0.8125, 1, 0.167175, 0.515625, 0.482958, 1 )
+
+[sub_resource type="GradientTexture" id=61]
+gradient = SubResource( 60 )
+
+[sub_resource type="Gradient" id=62]
+offsets = PoolRealArray( 0.163987, 0.392283, 0.639871, 0.974277 )
+colors = PoolColorArray( 0.988482, 0.994241, 0.993473, 0.902098, 0.882353, 0.941176, 0.933333, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=63]
+gradient = SubResource( 62 )
+width = 100
+
+[sub_resource type="ShaderMaterial" id=58]
+shader = SubResource( 1 )
+shader_param/scorll1 = Vector2( 0, 0 )
+shader_param/scorll2 = Vector2( 0.02, -0.1 )
+shader_param/col1Bonus = -0.131
+shader_param/col2Bonus = 0.505
+shader_param/sharpnes = 1.644
+shader_param/texture1 = ExtResource( 4 )
+shader_param/texture2 = ExtResource( 2 )
+shader_param/lifetimeGradient = SubResource( 61 )
+shader_param/overlapGradient = SubResource( 63 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=56]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.572727 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=57]
+curve = SubResource( 56 )
+
+[sub_resource type="ParticlesMaterial" id=59]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 30.11
+gravity = Vector3( 0, 0, 0 )
+initial_velocity_random = 0.35
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 0.65
+angle = 720.0
+angle_random = 1.0
+scale = 0.2
+scale_curve = SubResource( 57 )
+color_ramp = SubResource( 4 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="ThousandPetals" type="Particles2D"]
+modulate = Color( 2, 2, 2, 1 )
+material = SubResource( 58 )
+position = Vector2( 246.32, 293.854 )
+scale = Vector2( 6, 6 )
+amount = 10
+draw_order = 1
+process_material = SubResource( 59 )
+texture = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+playback_speed = 0.6
+playback/speed = 0.6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

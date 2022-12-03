@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture13.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform vec2 scroll1Speed = vec2(1.0,1.0);
+uniform vec2 scroll2Speed = vec2(1.0,1.0);
+uniform sampler2D texture2;
+uniform sampler2D gradient;
+
+uniform float sharpnes = 1.0;
+
+void fragment(){
+	float color1 = texture(TEXTURE, UV + scroll1Speed * TIME).r;
+	float color2 = texture(texture2, UV + scroll2Speed * TIME).r;
+	float energ = color1 * color2 - ( - sharpnes + UV.y);
+	COLOR = texture(gradient, vec2(energ));
+}"
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.241158, 0.418006, 0.598071, 0.77492, 0.897106, 1 )
+colors = PoolColorArray( 0.182436, 0.365811, 0.353363, 0.0905908, 0.84668, 0.809972, 0.178596, 1, 0.454902, 0.427451, 0.372549, 0.545098, 0.99329, 1, 0.429688, 1, 0.619608, 0.627451, 0.152941, 0, 1, 0.928917, 0.527344, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 60
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/scroll1Speed = Vector2( 0, -0.576 )
+shader_param/scroll2Speed = Vector2( 0.897, -1.617 )
+shader_param/sharpnes = 1.0
+shader_param/texture2 = ExtResource( 1 )
+shader_param/gradient = SubResource( 3 )
+
+[node name="ElectroStorm" type="Sprite"]
+material = SubResource( 4 )
+position = Vector2( 138.593, 42.4265 )
+texture = ExtResource( 1 )
+centered = false

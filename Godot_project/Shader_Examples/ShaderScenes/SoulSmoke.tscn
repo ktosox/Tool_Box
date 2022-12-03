@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture2.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/seamless_texture10.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Particles/beam3.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+uniform vec2 scorll1 = vec2(0.25,-0.3);
+uniform vec2 scorll2 = vec2(0.2,-0.4);
+
+uniform sampler2D lifetimeGradient;
+uniform sampler2D overlapGradient;
+
+uniform float sharpnes = 5.0;
+
+void fragment(){
+	
+	float particleSeed = COLOR.r / (COLOR.r + COLOR.b + COLOR.g);
+	
+	float adjustedTime = TIME + particleSeed * 154.685;
+	
+	float intesity = texture(texture1, UV + scorll1 * adjustedTime).r * texture(texture2, UV + scorll2 * adjustedTime).r;
+	
+	vec4 overlapColor = texture(overlapGradient, vec2(intesity * 2.8));
+	
+	vec4 lifetimeColor = texture(lifetimeGradient, vec2(COLOR.a));
+	COLOR = lifetimeColor * overlapColor;
+	COLOR.a *= min(1.0, intesity * sharpnes) * texture(TEXTURE,UV).a;
+}"
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.446945, 1 )
+colors = PoolColorArray( 0.552941, 0.552941, 0.552941, 0, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.196141, 0.231511, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.241379, 0.372345, 0.972656, 0.888237, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+width = 100
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 1 )
+shader_param/scorll1 = Vector2( 0, -0.1 )
+shader_param/scorll2 = Vector2( 0, 0.503 )
+shader_param/sharpnes = 6.443
+shader_param/texture1 = ExtResource( 2 )
+shader_param/texture2 = ExtResource( 1 )
+shader_param/lifetimeGradient = SubResource( 6 )
+shader_param/overlapGradient = SubResource( 8 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 14.08
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 72.63
+initial_velocity_random = 0.19
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 6.0
+scale = 0.2
+scale_random = 0.06
+color_ramp = SubResource( 4 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="SoulSmoke" type="Particles2D"]
+modulate = Color( 2, 2, 2, 1 )
+material = SubResource( 9 )
+position = Vector2( 224.326, 512.293 )
+scale = Vector2( 3, 3 )
+amount = 20
+lifetime = 2.0
+speed_scale = 0.6
+process_material = SubResource( 10 )
+texture = ExtResource( 3 )

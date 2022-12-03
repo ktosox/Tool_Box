@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture1.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/FellFire_Texture.tres" type="Texture" id=2]
+[ext_resource path="res://Shader_Examples/seamless_texture5.png" type="Texture" id=3]
+[ext_resource path="res://Shader_Examples/color_fade.tres" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 4 )
+shader_param/scrollSpeed = Vector2( 0, 0.7 )
+shader_param/texture2 = ExtResource( 3 )
+shader_param/gradient = ExtResource( 2 )
+
+[node name="FelFire" type="Sprite"]
+material = SubResource( 5 )
+texture = ExtResource( 1 )
+centered = false

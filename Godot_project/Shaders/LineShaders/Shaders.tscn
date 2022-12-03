@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Examples/LineShaders/2TextureLineShader.tres" type="Shader" id=1]
+[ext_resource path="res://WJ48/Noise1.png" type="Texture" id=2]
+[ext_resource path="res://WJ48/Noise3.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.106109, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/scorll1 = Vector2( -0.3, 0 )
+shader_param/scorll2 = Vector2( 0, 0 )
+shader_param/col1Bonus = 0.485
+shader_param/col2Bonus = -0.195
+shader_param/texture1 = ExtResource( 3 )
+shader_param/texture2 = ExtResource( 2 )
+shader_param/gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.494536, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Shaders" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 37.6025, 0.841858 )
+points = PoolVector2Array( 57, 144, 59.4079, 213.702, 67.7507, 249.628, 87.3543, 276.974, 124.124, 296.773, 176.753, 302.444, 217.92, 298.798, 271.521, 290.832 )
+width = 60.0
+width_curve = SubResource( 4 )
+texture_mode = 2

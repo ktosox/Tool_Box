@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture2.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/Seamles_texture2.tres" type="Texture" id=2]
+[ext_resource path="res://Shader_Examples/color_fade.tres" type="Shader" id=3]
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.234727, 0.273312, 0.414791, 0.585209, 0.636656 )
+colors = PoolColorArray( 0.321569, 0.321569, 0.321569, 0, 0.320312, 0.320312, 0.320312, 1, 0, 1, 0.882812, 0.329412, 0.09375, 0.893799, 1, 0.66906, 0, 1, 0.882353, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+width = 60
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 3 )
+shader_param/scrollSpeed = Vector2( 0, 1.653 )
+shader_param/texture2 = ExtResource( 1 )
+shader_param/gradient = SubResource( 13 )
+
+[node name="NotAWaterFall" type="Sprite"]
+material = SubResource( 14 )
+texture = ExtResource( 2 )
+centered = false

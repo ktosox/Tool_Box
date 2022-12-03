@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture5.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/Seamles_texture1.tres" type="Texture" id=2]
+[ext_resource path="res://Shader_Examples/edgles_fire.tres" type="Shader" id=3]
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0, 0.138264, 0.154341, 0.382637, 0.475884, 0.495177, 0.533762, 1 )
+colors = PoolColorArray( 0.184314, 0.0980392, 0.0980392, 0, 0.370026, 0, 0.488281, 0.388235, 0.0944672, 0.334415, 0.589844, 1, 0, 0, 0, 1, 0.199219, 0.924927, 1, 1, 0, 0, 0, 0.329412, 0, 1, 0.90625, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+width = 60
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 3 )
+shader_param/scrollSpeed = Vector2( 0, 0.6 )
+shader_param/texture2 = ExtResource( 1 )
+shader_param/gradient = SubResource( 18 )
+
+[node name="MetalicPlasma" type="Sprite"]
+material = SubResource( 19 )
+texture = ExtResource( 2 )
+centered = false

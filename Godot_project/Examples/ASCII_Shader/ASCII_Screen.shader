@@ -17,6 +17,7 @@ uniform sampler2D ascii_tex : hint_albedo;
 uniform vec2 ascii_size = vec2( 8.0, 16.0 );
 uniform int available_columns = 10;
 uniform int max_columns = 16;
+uniform float amount = 10.0;
 
 void fragment( )
 {
@@ -32,7 +33,9 @@ void fragment( )
 	) / 4.0;
 	vec2 ascii_uv = fract( SCREEN_UV / SCREEN_PIXEL_SIZE / ascii_size );
 	ascii_uv.x = ( 1.0 - ascii_uv.x ) / float( max_columns );
+	ascii_uv.y = ( roundEven(2.0 + sin( (UV.x *170.2+ UV.y *1610.0) ) ) - ascii_uv.y ) / 3.0;
 	float col = floor( dot( color.rgb, MONOCHROME_SCALE ) * float( available_columns ) ) / float( available_columns );
+
 	COLOR = texture(SCREEN_TEXTURE,SCREEN_UV);
 	if (on){
 	COLOR = texture( ascii_tex, ascii_uv + vec2( col * ( float( available_columns ) / float( max_columns ) ), 0.0 ) );

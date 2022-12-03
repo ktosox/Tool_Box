@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shader_Examples/seamless_texture6.png" type="Texture" id=1]
+[ext_resource path="res://Shader_Examples/seamless_texture8.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+uniform vec2 scrollSpeed = vec2(1.0,1.0);
+uniform float sharpnes = 1.0;
+uniform sampler2D texture2;
+uniform sampler2D gradient;
+
+void fragment(){
+	float color1 = texture(TEXTURE, UV + scrollSpeed * TIME).r;
+	float color2 = texture(texture2, UV + scrollSpeed * TIME).r;
+	float energy =  0.6 + color1 * color2 - ( UV.y * 0.6);
+	COLOR = texture(gradient, vec2(energy));
+}"
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.463023, 0.684887, 0.78135, 0.855305 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.282353, 0, 0.407843, 0, 1, 0, 0.84375, 1, 0.91333, 0.722656, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 60
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 5 )
+shader_param/scrollSpeed = Vector2( 0, -0.556 )
+shader_param/sharpnes = 0.626
+shader_param/texture2 = ExtResource( 1 )
+shader_param/gradient = SubResource( 3 )
+
+[node name="DataFlow" type="Sprite"]
+material = SubResource( 4 )
+texture = ExtResource( 2 )
+centered = false

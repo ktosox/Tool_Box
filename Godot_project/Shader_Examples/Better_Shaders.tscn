@@ -1,0 +1,65 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Shader_Examples/ShaderScenes/Firenado.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shader_Examples/scroll_shader.tres" type="Shader" id=2]
+[ext_resource path="res://Shader_Examples/Seamles_texture2.tres" type="Texture" id=3]
+[ext_resource path="res://Shader_Examples/Seamles_texture1.tres" type="Texture" id=4]
+[ext_resource path="res://Shader_Examples/ShaderScenes/SpookyDescent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Shader_Examples/seamless_texture2.png" type="Texture" id=6]
+[ext_resource path="res://Shader_Examples/ShaderScenes/MetalicPlasma.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Shader_Examples/ShaderScenes/NotAWaterFall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Shader_Examples/ShaderScenes/FelFire.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Shader_Examples/ShaderScenes/Napalm.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Shader_Examples/ShaderScenes/FireWall.tscn" type="PackedScene" id=11]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/scrollSpeed = Vector2( -0.041, 0.732 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 2 )
+shader_param/scrollSpeed = Vector2( 1, 0 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SimpleScroll" type="Sprite" parent="."]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 70.3502, 66.9168 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+
+[node name="SimpleScroll2" type="Sprite" parent="."]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 190.152, 65.582 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="FelFire" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="NotAWaterFall" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+material = SubResource( 6 )
+position = Vector2( 328.809, 79.59 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="Fire" parent="." instance=ExtResource( 11 )]
+visible = false
+
+[node name="Napalm" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="Firenado" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="SpookeDescent" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="MetalicPlasma" parent="." instance=ExtResource( 7 )]
+visible = false

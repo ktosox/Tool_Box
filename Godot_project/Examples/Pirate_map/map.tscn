@@ -67,5 +67,6 @@ curve = SubResource( 2 )
 modulate = Color( 1, 0, 0, 1 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 5 )
+
 [connection signal="pressed" from="Stop" to="." method="_on_Stop_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
