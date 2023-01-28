@@ -560,7 +560,6 @@ texture = ExtResource( 15 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 102.454, 37.8141 )
 frames = SubResource( 24 )
-frame = 4
 playing = true
 
 [node name="Wisp" type="Sprite" parent="AnimatedSprite"]

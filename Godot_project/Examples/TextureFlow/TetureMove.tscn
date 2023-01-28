@@ -16,7 +16,7 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 3 )
-shader_param/scrollSpeed = Vector2( -0.3, 0.181 )
+shader_param/scrollSpeed = Vector2( -0.117, 0.108 )
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -75,7 +75,6 @@ expand = true
 stretch_mode = 2
 
 [node name="Shelfs" type="TextureRect" parent="."]
-visible = false
 material = SubResource( 7 )
 margin_left = -234.656
 margin_top = -337.528

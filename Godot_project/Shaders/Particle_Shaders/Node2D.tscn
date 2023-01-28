@@ -63,9 +63,9 @@ visible = false
 visible = false
 
 [node name="ThousandPetals" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="EtherSmoke" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="AlienTerminal" parent="." instance=ExtResource( 9 )]
 visible = false

@@ -68,15 +68,15 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="VSeparator"]
-margin_right = 506.0
-margin_bottom = 576.0
+margin_right = 508.0
+margin_bottom = 768.0
 size_flags_horizontal = 3
 
 [node name="ColorRect" type="ColorRect" parent="VSeparator"]
 material = SubResource( 4 )
-margin_left = 518.0
-margin_right = 1024.0
-margin_bottom = 576.0
+margin_left = 520.0
+margin_right = 1028.0
+margin_bottom = 768.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
