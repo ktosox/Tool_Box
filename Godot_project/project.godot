@@ -8,8 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Examples/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Examples/StateMachine/StateMachine.gd"
+} ]
 _global_script_class_icons={
+"State": "res://Examples/StateMachine/state.svg",
+"StateMachine": "res://Examples/StateMachine/state_machine.svg"
 }
 
 [application]
