@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Examples/VoiceChanger/Core.gd" type="Script" id=1]
+[ext_resource path="res://Resources/water rocks 9.wav" type="AudioStream" id=2]
+
+[sub_resource type="AudioStreamMicrophone" id=1]
+
+[sub_resource type="AudioStreamGenerator" id=2]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id=3]
+
+[node name="Core" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -3.0
+margin_right = -4.0
+margin_bottom = -3.0
+script = ExtResource( 1 )
+
+[node name="Mic1" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+autoplay = true
+bus = "Record"
+
+[node name="Mic2" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 2 )
+autoplay = true
+bus = "Record2"
+
+[node name="Mic3" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 3 )
+autoplay = true
+bus = "Record3"
+
+[node name="SelectCaptureDevice" type="OptionButton" parent="."]
+margin_left = 192.0
+margin_top = 247.0
+margin_right = 465.0
+margin_bottom = 325.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 246.0
+margin_top = 225.0
+margin_right = 378.0
+margin_bottom = 239.0
+text = "SelectCaptureDevice"
+
+[node name="SelectOutputDevice" type="OptionButton" parent="."]
+margin_left = 540.0
+margin_top = 244.0
+margin_right = 799.0
+margin_bottom = 325.0
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 621.0
+margin_top = 223.0
+margin_right = 749.0
+margin_bottom = 237.0
+text = "SelectOutputDevice"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 297.0
+margin_top = 556.0
+margin_right = 360.0
+margin_bottom = 576.0
+text = "test SFX"
+
+[node name="testSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Record"
+
+[connection signal="item_selected" from="SelectCaptureDevice" to="." method="_on_SelectCaptureDevice_item_selected"]
+[connection signal="item_selected" from="SelectOutputDevice" to="." method="_on_SelectOutputDevice_item_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

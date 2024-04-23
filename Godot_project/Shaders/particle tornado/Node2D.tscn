@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Shaders/particle tornado/Pixel_Particle_3.png" type="Texture" id=1]
 
-
 [sub_resource type="Curve" id=46]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
