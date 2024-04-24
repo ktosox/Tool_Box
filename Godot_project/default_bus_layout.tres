@@ -12,9 +12,9 @@ fft_size = 4
 
 [sub_resource type="AudioEffectBandLimitFilter" id=16]
 resource_name = "BandLimitFilter"
-cutoff_hz = 2167.0
-resonance = 0.13
-gain = 0.96
+cutoff_hz = 1008.0
+resonance = 0.35
+gain = 1.29
 
 [sub_resource type="AudioEffectChorus" id=11]
 resource_name = "Chorus"
@@ -31,7 +31,7 @@ voice/2/cutoff_hz = 100.0
 
 [sub_resource type="AudioEffectPitchShift" id=9]
 resource_name = "PitchShift"
-pitch_scale = 1.05
+pitch_scale = 0.92
 oversampling = 5
 fft_size = 4
 
@@ -73,7 +73,7 @@ bus/5/name = "Record2"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -1.12151
+bus/5/volume_db = -4.00569
 bus/5/send = "Master"
 bus/5/effect/0/effect = SubResource( 6 )
 bus/5/effect/0/enabled = true
@@ -83,7 +83,7 @@ bus/6/name = "Record3"
 bus/6/solo = false
 bus/6/mute = false
 bus/6/bypass_fx = false
-bus/6/volume_db = -4.25003
+bus/6/volume_db = -5.63513
 bus/6/send = "Master"
 bus/6/effect/0/effect = SubResource( 11 )
 bus/6/effect/0/enabled = true
