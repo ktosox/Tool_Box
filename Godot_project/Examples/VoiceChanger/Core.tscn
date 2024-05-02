@@ -6,7 +6,6 @@
 [sub_resource type="AudioStreamMicrophone" id=1]
 
 [sub_resource type="AudioStreamGenerator" id=2]
-buffer_length = 0.1
 
 [sub_resource type="AudioStreamGenerator" id=3]
 

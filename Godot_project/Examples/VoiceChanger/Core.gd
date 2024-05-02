@@ -9,7 +9,9 @@ onready var playback2 = $Mic2.get_stream_playback()
 onready var playback3 = $Mic3.get_stream_playback()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
+	
+	
+	
 	for device in AudioServer.capture_get_device_list():
 		$SelectCaptureDevice.add_item(device)
 	
