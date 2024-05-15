@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Examples/VoiceChanger/Core.gd" type="Script" id=1]
 [ext_resource path="res://Resources/water rocks 9.wav" type="AudioStream" id=2]
@@ -6,8 +6,6 @@
 [sub_resource type="AudioStreamMicrophone" id=1]
 
 [sub_resource type="AudioStreamGenerator" id=2]
-
-[sub_resource type="AudioStreamGenerator" id=3]
 
 [node name="Core" type="Control"]
 anchor_right = 1.0
@@ -29,7 +27,7 @@ autoplay = true
 bus = "Record2"
 
 [node name="Mic3" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 3 )
+stream = SubResource( 2 )
 autoplay = true
 bus = "Record3"
 

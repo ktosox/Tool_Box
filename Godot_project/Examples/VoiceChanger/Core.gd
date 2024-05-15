@@ -10,6 +10,7 @@ onready var playback3 = $Mic3.get_stream_playback()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+
 	
 	
 	for device in AudioServer.capture_get_device_list():
@@ -29,9 +30,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var idx = AudioServer.get_bus_index("Record")
-	var capture = AudioServer.get_bus_effect(idx, 0)
+	var capture = AudioServer.get_bus_effect(idx, 1)
 	var buffer = capture.get_buffer(capture.get_frames_available())
 	playback2.push_buffer(buffer)
+	
 	playback3.push_buffer(buffer)
 	pass
 
